@@ -3,6 +3,8 @@ import { revalidatePath } from "next/cache";
 import { checkAdminPassword } from "@/lib/auth";
 import { getSettings, updateSettings } from "@/lib/store";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   return NextResponse.json(await getSettings());
 }

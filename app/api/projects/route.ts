@@ -5,6 +5,8 @@ import { Project } from "@/lib/types";
 import { checkAdminPassword } from "@/lib/auth";
 import { randomUUID } from "crypto";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   return NextResponse.json(await getProjects());
 }

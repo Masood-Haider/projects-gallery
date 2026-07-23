@@ -7,6 +7,8 @@ interface Params {
   params: { id: string };
 }
 
+export const dynamic = "force-dynamic";
+
 export async function GET(_req: NextRequest, { params }: Params) {
   const project = await getProjectById(params.id);
   if (!project) {
