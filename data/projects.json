@@ -1,0 +1,36 @@
+[
+  {
+    "id": "1",
+    "title": "E-Commerce UI",
+    "description": "A modern e-commerce front-end built with React and Tailwind.",
+    "longDescription": "A fully responsive e-commerce storefront featuring product listing, cart management, and checkout flow. Built with React 18, Tailwind CSS, and Zustand for state management.",
+    "category": "frontend",
+    "techStack": [
+      "React",
+      "Tailwind CSS",
+      "Zustand"
+    ],
+    "liveUrl": "https://example.vercel.app",
+    "githubUrl": "https://github.com/masoodhaider/ecommerce-ui",
+    "screenshots": [],
+    "thumbnail": "",
+    "createdAt": "2026-07-23T05:46:58.151Z"
+  },
+  {
+    "id": "2",
+    "title": "Task Manager App",
+    "description": "Full-stack task manager with auth, REST API and React UI.",
+    "longDescription": "A full-stack task management application with user authentication, real-time updates, and a clean dashboard. Backend powered by Node.js/Express with a PostgreSQL database.",
+    "category": "fullstack",
+    "techStack": [
+      "Next.js",
+      "Node.js",
+      "PostgreSQL",
+      "Tailwind CSS"
+    ],
+    "githubUrl": "https://github.com/masoodhaider/task-manager",
+    "screenshots": [],
+    "thumbnail": "",
+    "createdAt": "2026-07-23T05:46:58.151Z"
+  }
+]
