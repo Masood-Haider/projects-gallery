@@ -29,8 +29,13 @@ const config: Config = {
         'scan': 'scan 8s linear infinite',
         'scan-reverse': 'scan-reverse 8s linear infinite',
         'morph-square': 'morphSquare 2.4s ease-in-out infinite',
+        'line-fill': 'lineFill 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards',
       },
       keyframes: {
+        'lineFill': {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
         'morphSquare': {
           '0%, 100%': { transform: 'rotate(0deg)', borderRadius: '0%' },
           '50%': { transform: 'rotate(180deg)', borderRadius: '50%' },
