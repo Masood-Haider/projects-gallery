@@ -28,8 +28,13 @@ const config: Config = {
         'blob': 'blob 7s infinite',
         'scan': 'scan 8s linear infinite',
         'scan-reverse': 'scan-reverse 8s linear infinite',
+        'morph-square': 'morphSquare 2.4s ease-in-out infinite',
       },
       keyframes: {
+        'morphSquare': {
+          '0%, 100%': { transform: 'rotate(0deg)', borderRadius: '0%' },
+          '50%': { transform: 'rotate(180deg)', borderRadius: '50%' },
+        },
         'spin-reverse': {
           '0%': { transform: 'rotate(360deg)' },
           '100%': { transform: 'rotate(0deg)' },
