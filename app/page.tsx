@@ -5,9 +5,9 @@ import { getSettings, getProjects } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
-export default function HomePage() {
-  const settings = getSettings();
-  const projects = getProjects();
+export default async function HomePage() {
+  const settings = await getSettings();
+  const projects = await getProjects();
   return (
     <div className="relative min-h-[calc(100vh-4rem)] flex flex-col overflow-hidden">
       {/* Hero */}

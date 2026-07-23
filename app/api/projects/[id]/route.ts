@@ -8,7 +8,7 @@ interface Params {
 }
 
 export async function GET(_req: NextRequest, { params }: Params) {
-  const project = getProjectById(params.id);
+  const project = await getProjectById(params.id);
   if (!project) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
@@ -23,7 +23,7 @@ export async function PUT(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const updated = updateProject(params.id, updates);
+  const updated = await updateProject(params.id, updates);
   if (!updated) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
@@ -41,7 +41,7 @@ export async function DELETE(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const deleted = deleteProject(params.id);
+  const deleted = await deleteProject(params.id);
   if (!deleted) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }

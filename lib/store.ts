@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { Redis } from "@upstash/redis";
 import { Project, Settings } from "./types";
 
 const seedProjects: Project[] = [
@@ -37,6 +38,16 @@ const seedSettings: Settings = {
   profilePhoto: "",
 };
 
+// Initialize Redis if Vercel KV / Upstash credentials are set
+const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+
+const redis = kvUrl && kvToken ? new Redis({ url: kvUrl, token: kvToken }) : null;
+
+const PROJECTS_KEY = "portfolio:projects";
+const SETTINGS_KEY = "portfolio:settings";
+
+// Local file system fallback
 const dataDir = path.join(process.cwd(), "data");
 const projectsFile = path.join(dataDir, "projects.json");
 const settingsFile = path.join(dataDir, "settings.json");
@@ -47,7 +58,7 @@ function ensureDataDir() {
   }
 }
 
-function readProjects(): Project[] {
+function readProjectsLocal(): Project[] {
   ensureDataDir();
   if (!fs.existsSync(projectsFile)) {
     fs.writeFileSync(projectsFile, JSON.stringify(seedProjects, null, 2), "utf-8");
@@ -61,12 +72,12 @@ function readProjects(): Project[] {
   }
 }
 
-function writeProjects(projects: Project[]): void {
+function writeProjectsLocal(projects: Project[]): void {
   ensureDataDir();
   fs.writeFileSync(projectsFile, JSON.stringify(projects, null, 2), "utf-8");
 }
 
-function readSettings(): Settings {
+function readSettingsLocal(): Settings {
   ensureDataDir();
   if (!fs.existsSync(settingsFile)) {
     fs.writeFileSync(settingsFile, JSON.stringify(seedSettings, null, 2), "utf-8");
@@ -80,53 +91,110 @@ function readSettings(): Settings {
   }
 }
 
-function writeSettings(settings: Settings): void {
+function writeSettingsLocal(settings: Settings): void {
   ensureDataDir();
   fs.writeFileSync(settingsFile, JSON.stringify(settings, null, 2), "utf-8");
 }
 
-export const getProjects = (): Project[] => {
-  return readProjects();
-};
+// ==========================================
+// Public Store API (Async - Vercel KV + Local Fallback)
+// ==========================================
 
-export const getProjectById = (id: string): Project | undefined => {
-  const projects = readProjects();
+export async function getProjects(): Promise<Project[]> {
+  if (redis) {
+    try {
+      const data = await redis.get<Project[]>(PROJECTS_KEY);
+      if (data && Array.isArray(data)) return data;
+      // Seed KV if empty
+      await redis.set(PROJECTS_KEY, seedProjects);
+      return seedProjects;
+    } catch (e) {
+      console.error("Vercel KV Error (getProjects), falling back to local storage:", e);
+    }
+  }
+  return readProjectsLocal();
+}
+
+export async function getProjectById(id: string): Promise<Project | undefined> {
+  const projects = await getProjects();
   return projects.find((p) => p.id === id);
-};
+}
 
-export const addProject = (project: Project): void => {
-  const projects = readProjects();
+export async function addProject(project: Project): Promise<void> {
+  const projects = await getProjects();
   projects.push(project);
-  writeProjects(projects);
-};
+  if (redis) {
+    try {
+      await redis.set(PROJECTS_KEY, projects);
+      return;
+    } catch (e) {
+      console.error("Vercel KV Error (addProject):", e);
+    }
+  }
+  writeProjectsLocal(projects);
+}
 
-export const updateProject = (
+export async function updateProject(
   id: string,
   updates: Partial<Omit<Project, "id">>
-): Project | null => {
-  const projects = readProjects();
+): Promise<Project | null> {
+  const projects = await getProjects();
   const idx = projects.findIndex((p) => p.id === id);
   if (idx === -1) return null;
   projects[idx] = { ...projects[idx], ...updates };
-  writeProjects(projects);
+  if (redis) {
+    try {
+      await redis.set(PROJECTS_KEY, projects);
+      return projects[idx];
+    } catch (e) {
+      console.error("Vercel KV Error (updateProject):", e);
+    }
+  }
+  writeProjectsLocal(projects);
   return projects[idx];
-};
+}
 
-export const deleteProject = (id: string): boolean => {
-  const projects = readProjects();
+export async function deleteProject(id: string): Promise<boolean> {
+  const projects = await getProjects();
   const filtered = projects.filter((p) => p.id !== id);
   if (filtered.length === projects.length) return false;
-  writeProjects(filtered);
+  if (redis) {
+    try {
+      await redis.set(PROJECTS_KEY, filtered);
+      return true;
+    } catch (e) {
+      console.error("Vercel KV Error (deleteProject):", e);
+    }
+  }
+  writeProjectsLocal(filtered);
   return true;
-};
+}
 
-export const getSettings = (): Settings => {
-  return readSettings();
-};
+export async function getSettings(): Promise<Settings> {
+  if (redis) {
+    try {
+      const data = await redis.get<Settings>(SETTINGS_KEY);
+      if (data) return data;
+      await redis.set(SETTINGS_KEY, seedSettings);
+      return seedSettings;
+    } catch (e) {
+      console.error("Vercel KV Error (getSettings), falling back to local storage:", e);
+    }
+  }
+  return readSettingsLocal();
+}
 
-export const updateSettings = (updates: Partial<Settings>): Settings => {
-  const current = readSettings();
+export async function updateSettings(updates: Partial<Settings>): Promise<Settings> {
+  const current = await getSettings();
   const updated = { ...current, ...updates };
-  writeSettings(updated);
+  if (redis) {
+    try {
+      await redis.set(SETTINGS_KEY, updated);
+      return updated;
+    } catch (e) {
+      console.error("Vercel KV Error (updateSettings):", e);
+    }
+  }
+  writeSettingsLocal(updated);
   return updated;
-};
+}

@@ -4,7 +4,7 @@ import { checkAdminPassword } from "@/lib/auth";
 import { getSettings, updateSettings } from "@/lib/store";
 
 export async function GET() {
-  return NextResponse.json(getSettings());
+  return NextResponse.json(await getSettings());
 }
 
 export async function PUT(req: NextRequest) {
@@ -28,7 +28,7 @@ export async function PUT(req: NextRequest) {
     );
   }
 
-  const updated = updateSettings({ yearsOfExperience, profilePhoto });
+  const updated = await updateSettings({ yearsOfExperience, profilePhoto });
   revalidatePath("/");
   revalidatePath("/about");
   return NextResponse.json(updated);

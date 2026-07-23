@@ -6,7 +6,7 @@ import { checkAdminPassword } from "@/lib/auth";
 import { randomUUID } from "crypto";
 
 export async function GET() {
-  return NextResponse.json(getProjects());
+  return NextResponse.json(await getProjects());
 }
 
 export async function POST(req: NextRequest) {
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     createdAt: new Date().toISOString(),
   };
 
-  addProject(project);
+  await addProject(project);
   revalidatePath("/");
   revalidatePath("/projects");
   return NextResponse.json(project, { status: 201 });
