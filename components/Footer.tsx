@@ -2,7 +2,11 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-charcoal/10 bg-base">
+    <footer className="relative border-t border-charcoal/10 bg-base overflow-hidden">
+      {/* Top Animated Gold Border Line */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-charcoal/10 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 h-[1.5px] w-80 bg-gradient-to-r from-transparent via-[#C5A059] to-transparent animate-marquee-reverse shadow-[0_0_10px_#C5A059]" />
+      </div>
       <div className="mx-auto max-w-6xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Left: Email icon + Name */}
         <div className="flex items-center gap-3">
