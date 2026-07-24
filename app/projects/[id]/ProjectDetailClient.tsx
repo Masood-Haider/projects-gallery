@@ -37,11 +37,11 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
     project.category === "frontend" ? "Frontend" : "Full Stack";
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 pb-20 pt-28 sm:pt-32">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 pb-16 pt-20 sm:pt-24">
       {/* Back link */}
       <Link
         href="/projects"
-        className="inline-flex items-center gap-2 text-sm font-semibold text-charcoal/70 hover:text-gold transition-colors mb-10"
+        className="inline-flex items-center gap-2 text-sm font-semibold text-charcoal/70 hover:text-gold transition-colors mb-5"
       >
         <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
           <path
