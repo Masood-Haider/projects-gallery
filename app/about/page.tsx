@@ -4,19 +4,19 @@ import Image from "next/image";
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-5xl px-6 pb-20 pt-32">
+    <div className="mx-auto max-w-5xl px-4 sm:px-6 pb-20 pt-28 sm:pt-32">
 
       {/* Hero row */}
-      <div className="flex flex-col items-center gap-10 md:flex-row md:items-start md:gap-16">
+      <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-16">
         {/* Avatar */}
         <div className="flex-shrink-0">
-          <div className="relative h-40 w-40 sm:h-44 sm:w-44 rounded-full border-2 border-charcoal/10 bg-base overflow-hidden shadow-md group hover:border-gold/50 transition-all duration-300">
+          <div className="relative h-32 w-32 sm:h-44 sm:w-44 rounded-full border-2 border-charcoal/10 bg-base overflow-hidden shadow-md group hover:border-gold/50 transition-all duration-300">
             <Image
               src="https://i.ibb.co/ZRKWPxy0/Untitled-design-3.jpg"
               alt="Masood Haider"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
-              sizes="(max-width: 640px) 160px, 176px"
+              sizes="(max-width: 640px) 128px, 176px"
               priority
             />
           </div>
@@ -24,35 +24,34 @@ export default function AboutPage() {
 
         {/* Intro */}
         <div className="text-center md:text-left">
-          <h1 className="text-4xl font-extrabold text-charcoal sm:text-5xl">
+          <h1 className="text-3xl font-extrabold text-charcoal sm:text-5xl">
             Masood Haider
           </h1>
-          <p className="mt-2 text-base font-medium text-gold">
+          <p className="mt-2 text-sm sm:text-base font-medium text-gold">
             Full-Stack Developer
           </p>
-          <p className="mt-4 max-w-xl text-charcoal/70 leading-relaxed">
+          <p className="mt-4 max-w-xl text-sm sm:text-base text-charcoal/70 leading-relaxed">
             I design and build modern web applications — from polished,
             accessible frontends to scalable back-end systems. I love turning
             ideas into real products that people actually enjoy using.
           </p>
 
           {/* CTA buttons */}
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:justify-start">
             <a
               href="/cv/masood-haider-cv.pdf"
               download="Masood_Haider_CV.pdf"
-              className="inline-flex items-center gap-2 rounded-full bg-charcoal px-6 py-2.5 text-sm font-semibold text-base hover:bg-gold hover:text-white transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 rounded-full bg-charcoal px-5 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold text-base hover:bg-gold hover:text-white transition-colors shadow-sm"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
               Download CV
             </a>
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 rounded-full border border-charcoal/20 px-6 py-2.5 text-sm font-semibold text-charcoal hover:border-gold hover:text-gold transition-colors"
+              className="inline-flex items-center gap-2 rounded-full border border-charcoal/20 px-5 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold text-charcoal hover:border-gold hover:text-gold transition-colors"
             >
               View Projects
             </Link>
@@ -61,32 +60,32 @@ export default function AboutPage() {
       </div>
 
       {/* Divider */}
-      <div className="my-14 border-t border-charcoal/10" />
+      <div className="my-10 sm:my-14 border-t border-charcoal/10" />
 
       {/* Skills section */}
       <section className="mb-14">
-        <h2 className="mb-6 text-2xl font-bold text-charcoal">
+        <h2 className="mb-6 text-xl sm:text-2xl font-bold text-charcoal">
           Skills &amp; Technologies
         </h2>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4 sm:gap-5">
           {skillGroups.map((group) => (
             <div
               key={group.label}
-              className="group rounded-2xl border border-charcoal/10 bg-base shadow-sm p-6 hover:border-gold/40 hover:shadow-md transition-all duration-200 flex flex-col md:flex-row md:items-center gap-4 md:gap-8"
+              className="group rounded-2xl border border-charcoal/10 bg-base shadow-sm p-4 sm:p-6 hover:border-gold/40 hover:shadow-md transition-all duration-200 flex flex-col md:flex-row md:items-center gap-3 sm:gap-4 md:gap-8 overflow-hidden"
             >
               <div className="md:w-44 flex-shrink-0">
-                <h3 className="text-sm font-bold uppercase tracking-widest text-charcoal/50 group-hover:text-gold transition-colors">
+                <h3 className="text-xs sm:text-sm font-bold uppercase tracking-widest text-charcoal/50 group-hover:text-gold transition-colors">
                   {group.label}
                 </h3>
               </div>
-              <div className="flex flex-wrap items-center gap-2 flex-1">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 flex-1">
                 {group.skills.map((skill) => (
                   <span
                     key={skill}
-                    className={`inline-flex items-center gap-2 rounded-lg border border-charcoal/10 px-3 py-1.5 text-xs font-semibold shadow-sm hover:scale-105 transition-all duration-200 ${getSkillColors(skill)}`}
+                    className={`inline-flex items-center gap-1.5 sm:gap-2 rounded-lg border border-charcoal/10 px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-semibold shadow-sm hover:scale-105 transition-all duration-200 max-w-full truncate ${getSkillColors(skill)}`}
                   >
                     <SkillIcon name={skill} />
-                    {skill}
+                    <span className="truncate">{skill}</span>
                   </span>
                 ))}
               </div>
@@ -97,7 +96,7 @@ export default function AboutPage() {
 
       {/* Social links detail */}
       <section className="mb-14">
-        <h2 className="mb-6 text-2xl font-bold text-charcoal">Connect with me</h2>
+        <h2 className="mb-6 text-xl sm:text-2xl font-bold text-charcoal">Connect with me</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {socialLinks.map((link) => (
             <a
@@ -105,16 +104,16 @@ export default function AboutPage() {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 rounded-xl border border-charcoal/10 bg-base p-4 hover:border-gold hover:shadow-md transition-all"
+              className="group flex items-center gap-3 sm:gap-4 rounded-xl border border-charcoal/10 bg-base p-3.5 sm:p-4 hover:border-gold hover:shadow-md transition-all overflow-hidden min-w-0"
             >
-              <span className="text-charcoal group-hover:text-gold transition-colors">
+              <span className="text-charcoal group-hover:text-gold transition-colors flex-shrink-0">
                 <PlatformIcon name={link.icon} />
               </span>
-              <div>
-                <p className="text-sm font-semibold text-charcoal group-hover:text-gold transition-colors">
+              <div className="min-w-0 flex-1 overflow-hidden">
+                <p className="text-xs sm:text-sm font-semibold text-charcoal group-hover:text-gold transition-colors truncate">
                   {link.name}
                 </p>
-                <p className="text-xs text-charcoal font-medium truncate max-w-[200px] group-hover:text-gold transition-colors">
+                <p className="text-[11px] sm:text-xs text-charcoal font-medium truncate group-hover:text-gold transition-colors">
                   {link.url}
                 </p>
               </div>
@@ -168,7 +167,7 @@ const skillGroups = [
 ];
 
 function SkillIcon({ name }: { name: string }) {
-  const cls = "w-4.5 h-4.5 sm:w-5 sm:h-5 flex-shrink-0";
+  const cls = "w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0";
   switch (name) {
     case "React":
       return (
