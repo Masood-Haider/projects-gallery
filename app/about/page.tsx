@@ -9,6 +9,7 @@ export default function AboutPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     subject: "",
     message: "",
   });
@@ -29,6 +30,7 @@ export default function AboutPage() {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
+          phone: formData.phone || "Not provided",
           _subject: formData.subject || `Project Inquiry from ${formData.name}`,
           message: formData.message,
         }),
@@ -36,7 +38,7 @@ export default function AboutPage() {
 
       if (res.ok) {
         setSubmitted(true);
-        setFormData({ name: "", email: "", subject: "", message: "" });
+        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
       } else {
         triggerMailto();
       }
@@ -50,7 +52,7 @@ export default function AboutPage() {
   const triggerMailto = () => {
     const mailtoSubject = encodeURIComponent(formData.subject || `Project Inquiry from ${formData.name}`);
     const mailtoBody = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || "Not provided"}\n\nMessage:\n${formData.message}`
     );
     window.location.href = `mailto:masood.haider.bangash1@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
     setSubmitted(true);
@@ -226,7 +228,7 @@ export default function AboutPage() {
                   placeholder="John Doe"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/30 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors"
+                  className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/60 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors"
                 />
               </div>
               <div>
@@ -240,23 +242,38 @@ export default function AboutPage() {
                   placeholder="john@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/30 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors"
+                  className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/60 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors"
                 />
               </div>
             </div>
 
-            <div>
-              <label htmlFor="subject" className="block text-xs font-bold uppercase tracking-wider text-charcoal/70 mb-1.5">
-                Subject
-              </label>
-              <input
-                type="text"
-                id="subject"
-                placeholder="Project Inquiry / Hiring"
-                value={formData.subject}
-                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/30 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors"
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="phone" className="block text-xs font-bold uppercase tracking-wider text-charcoal/70 mb-1.5">
+                  Contact Number <span className="text-charcoal/40 font-normal lowercase">(optional)</span>
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  placeholder="+1 (555) 000-0000"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/60 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors"
+                />
+              </div>
+              <div>
+                <label htmlFor="subject" className="block text-xs font-bold uppercase tracking-wider text-charcoal/70 mb-1.5">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  placeholder="Project Inquiry / Hiring"
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/60 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors"
+                />
+              </div>
             </div>
 
             <div>
@@ -270,7 +287,7 @@ export default function AboutPage() {
                 placeholder="Tell me about your project, timeline, and goals..."
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/30 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors resize-none"
+                className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/60 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors resize-none"
               />
             </div>
 

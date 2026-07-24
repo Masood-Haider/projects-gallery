@@ -698,7 +698,7 @@ export default function AdminDashboard() {
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const inputCls =
-  "w-full rounded-xl border border-charcoal/10 bg-base px-4 py-2.5 text-sm text-charcoal placeholder-charcoal/20 outline-none focus:border-gold focus:ring-1 focus:ring-gold transition shadow-sm";
+  "w-full rounded-xl border border-charcoal/10 bg-base px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/60 outline-none focus:border-gold focus:ring-1 focus:ring-gold transition shadow-sm";
 
 function Field({
   label,
