@@ -148,21 +148,6 @@ export default function ConstellationBackground() {
         }
       }
 
-      // Draw explicit central joining point node at mouse position
-      if (mouse.x > 0 && mouse.y > 0) {
-        ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, 7, 0, Math.PI * 2);
-        ctx.fillStyle = "#C5A059";
-        ctx.globalAlpha = 0.2;
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = "#C5A059";
-        ctx.globalAlpha = 0.95;
-        ctx.fill();
-      }
-
       ctx.restore();
       animationFrameId = requestAnimationFrame(draw);
     };
