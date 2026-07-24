@@ -37,7 +37,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
     project.category === "frontend" ? "Frontend" : "Full Stack";
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 pb-16 pt-20 sm:pt-24">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 pb-16 pt-18 sm:pt-20">
       {/* Back link */}
       <Link
         href="/projects"
