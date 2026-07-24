@@ -137,22 +137,22 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           >
             {allImages.length > 0 ? (
               <>
-                {allImages.map((img, idx) => (
-                  <div
-                    key={idx}
-                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                      idx === activeIndex ? "opacity-100 z-10 scale-100" : "opacity-0 z-0 scale-105 pointer-events-none"
-                    }`}
-                  >
-                    <Image
-                      src={img}
-                      alt={`${project.title} screenshot ${idx + 1}`}
-                      fill
-                      className="object-cover"
-                      priority={idx === 0}
-                    />
-                  </div>
-                ))}
+                <div
+                  className="flex h-full w-full transition-transform duration-700 ease-in-out"
+                  style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+                >
+                  {allImages.map((img, idx) => (
+                    <div key={idx} className="relative h-full w-full flex-shrink-0">
+                      <Image
+                        src={img}
+                        alt={`${project.title} screenshot ${idx + 1}`}
+                        fill
+                        className="object-cover"
+                        priority={idx === 0}
+                      />
+                    </div>
+                  ))}
+                </div>
 
                 {/* Left/Right Arrow Nav Overlay */}
                 {allImages.length > 1 && (
