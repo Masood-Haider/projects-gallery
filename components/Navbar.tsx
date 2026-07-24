@@ -23,7 +23,7 @@ export default function Navbar() {
           href="/"
           className="text-xl font-bold tracking-tight text-charcoal hover:text-charcoal/70 transition-colors"
         >
-          Masood Haider
+          Projects Gallery
         </Link>
 
         {/* Desktop links */}

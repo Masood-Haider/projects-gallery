@@ -10,7 +10,7 @@ export default function AboutPage() {
       <div className="flex flex-col items-center gap-10 md:flex-row md:items-start md:gap-16">
         {/* Avatar */}
         <div className="flex-shrink-0">
-          <div className="relative h-40 w-40 sm:h-44 sm:w-44 rounded-2xl border-2 border-charcoal/10 bg-base overflow-hidden shadow-md group hover:border-gold/50 transition-all duration-300">
+          <div className="relative h-40 w-40 sm:h-44 sm:w-44 rounded-full border-2 border-charcoal/10 bg-base overflow-hidden shadow-md group hover:border-gold/50 transition-all duration-300">
             <Image
               src="https://i.ibb.co/ZRKWPxy0/Untitled-design-3.jpg"
               alt="Masood Haider"
