@@ -14,9 +14,9 @@
   <!-- Dark Charcoal Background Card with Gold Border -->
   <rect x="1" y="1" width="30" height="30" rx="8" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="1.5" />
   
-  <!-- Bold Stylized P Monogram Mark -->
-  <path d="M10 8.5v15M10 8.5h6.5a3.75 3.75 0 0 1 0 7.5H10" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Bold Stylized M Monogram Mark -->
+  <path d="M8 23.5V8.5L16 16.5L24 8.5V23.5" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
   
-  <!-- Gold Accent Star Dot -->
-  <circle cx="21.5" cy="18.5" r="2" fill="url(#goldGrad)" />
+  <!-- Gold Accent Dot -->
+  <circle cx="26" cy="22" r="1.75" fill="url(#goldGrad)" />
 </svg>
