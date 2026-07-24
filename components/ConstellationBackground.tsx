@@ -30,8 +30,9 @@ export default function ConstellationBackground() {
 
     const updateDimensions = () => {
       const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
+      const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
     };
 
     updateDimensions();
@@ -65,14 +66,15 @@ export default function ConstellationBackground() {
     window.addEventListener("mouseleave", handleMouseLeave);
 
     // Create constellation particles
-    const particleCount = Math.max(Math.floor((canvas.width * canvas.height) / 8000), 50);
+    const initialRect = canvas.getBoundingClientRect();
+    const particleCount = Math.max(Math.floor((initialRect.width * initialRect.height) / 8000), 50);
     const particles: Particle[] = [];
     const colors = ["#C5A059", "#C5A059", "#2C2C2C"]; // Champagne Gold & Dark Charcoal
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        x: Math.random() * initialRect.width,
+        y: Math.random() * initialRect.height,
         vx: (Math.random() - 0.5) * 0.7,
         vy: (Math.random() - 0.5) * 0.7,
         radius: Math.random() * 1.8 + 1,
@@ -82,10 +84,15 @@ export default function ConstellationBackground() {
 
     // Animation Loop
     const draw = () => {
-      const width = canvas.width;
-      const height = canvas.height;
+      const rect = canvas.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+      const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
 
-      ctx.clearRect(0, 0, width, height);
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.scale(dpr, dpr);
 
       // Render & Update Particles
       for (let i = 0; i < particles.length; i++) {
@@ -124,21 +131,39 @@ export default function ConstellationBackground() {
         }
 
         // Connect particle to mouse cursor
-        const mdx = p.x - mouse.x;
-        const mdy = p.y - mouse.y;
-        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (mouse.x > 0 && mouse.y > 0) {
+          const mdx = p.x - mouse.x;
+          const mdy = p.y - mouse.y;
+          const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
 
-        if (mdist < mouse.radius) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = "#C5A059";
-          ctx.globalAlpha = (1 - mdist / mouse.radius) * 0.4;
-          ctx.lineWidth = 1.0;
-          ctx.stroke();
+          if (mdist < mouse.radius) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = "#C5A059";
+            ctx.globalAlpha = (1 - mdist / mouse.radius) * 0.45;
+            ctx.lineWidth = 1.0;
+            ctx.stroke();
+          }
         }
       }
 
+      // Draw explicit central joining point node at mouse position
+      if (mouse.x > 0 && mouse.y > 0) {
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 7, 0, Math.PI * 2);
+        ctx.fillStyle = "#C5A059";
+        ctx.globalAlpha = 0.2;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = "#C5A059";
+        ctx.globalAlpha = 0.95;
+        ctx.fill();
+      }
+
+      ctx.restore();
       animationFrameId = requestAnimationFrame(draw);
     };
 
