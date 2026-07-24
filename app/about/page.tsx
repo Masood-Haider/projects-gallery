@@ -69,11 +69,11 @@ export default function AboutPage() {
               <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-charcoal/40">
                 {group.label}
               </p>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-2.5">
                 {group.skills.map((skill) => (
                   <span
                     key={skill}
-                    className={`inline-flex items-center gap-1.5 rounded-md border border-transparent px-2.5 py-1 text-xs font-medium shadow-sm ${getSkillColors(skill)}`}
+                    className={`inline-flex items-center gap-2.5 rounded-xl border border-charcoal/10 px-3.5 py-2 text-sm font-semibold shadow-sm hover:scale-105 transition-all duration-200 ${getSkillColors(skill)}`}
                   >
                     <SkillIcon name={skill} />
                     {skill}
@@ -158,7 +158,7 @@ const skillGroups = [
 ];
 
 function SkillIcon({ name }: { name: string }) {
-  const cls = "w-3.5 h-3.5 flex-shrink-0";
+  const cls = "w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0";
   switch (name) {
     case "React":
       return (
