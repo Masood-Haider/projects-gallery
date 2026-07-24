@@ -1,8 +1,29 @@
+"use client";
+
 import { socialLinks } from "@/lib/social";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function AboutPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const mailtoSubject = encodeURIComponent(formData.subject || `Project Inquiry from ${formData.name}`);
+    const mailtoBody = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
+    window.location.href = `mailto:masood.haider.bangash1@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+    setSubmitted(true);
+  };
+
   return (
     <div className="mx-auto max-w-5xl px-4 sm:px-6 pb-20 pt-28 sm:pt-32">
 
@@ -129,23 +150,112 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section className="rounded-2xl border border-charcoal/10 bg-base p-8 text-center">
-        <h2 className="text-2xl font-bold text-charcoal">Got a project in mind?</h2>
-        <p className="mt-3 text-charcoal/70 max-w-md mx-auto">
-          I&apos;m currently available for freelance work and full-time
-          positions. Let&apos;s build something great together.
-        </p>
-        <a
-          href="mailto:masood.haider.bangash1@gmail.com"
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-charcoal px-7 py-3 text-sm font-semibold text-base hover:bg-gold transition-colors shadow-sm"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-            <polyline points="22,6 12,13 2,6" />
-          </svg>
-          Send an Email
-        </a>
+      {/* Contact CTA & Form */}
+      <section className="rounded-2xl border border-charcoal/10 bg-base p-6 sm:p-10 shadow-sm">
+        <div className="max-w-xl mx-auto text-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-charcoal">Got a project in mind?</h2>
+          <p className="mt-3 text-sm sm:text-base text-charcoal/70 leading-relaxed">
+            Fill out the form below or send an email directly to{" "}
+            <a href="mailto:masood.haider.bangash1@gmail.com" className="text-gold font-semibold hover:underline">
+              masood.haider.bangash1@gmail.com
+            </a>
+          </p>
+        </div>
+
+        {submitted ? (
+          <div className="max-w-xl mx-auto rounded-xl border border-green-500/30 bg-green-50/50 p-6 text-center animate-fade-in">
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-green-600 mb-3">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-6 w-6">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-charcoal">Message Ready to Send!</h3>
+            <p className="mt-1 text-sm text-charcoal/70">
+              Your mail client has been opened with your message. If it didn&apos;t open automatically, feel free to email directly.
+            </p>
+            <button
+              onClick={() => setSubmitted(false)}
+              className="mt-4 text-xs font-semibold text-gold hover:underline"
+            >
+              Send another message
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4 text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-charcoal/70 mb-1.5">
+                  Your Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  placeholder="John Doe"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/30 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-charcoal/70 mb-1.5">
+                  Your Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  placeholder="john@example.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/30 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="subject" className="block text-xs font-bold uppercase tracking-wider text-charcoal/70 mb-1.5">
+                Subject
+              </label>
+              <input
+                type="text"
+                id="subject"
+                placeholder="Project Inquiry / Hiring"
+                value={formData.subject}
+                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/30 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-charcoal/70 mb-1.5">
+                Message <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                id="message"
+                required
+                rows={4}
+                placeholder="Tell me about your project, timeline, and goals..."
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                className="w-full rounded-xl border border-charcoal/15 bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/30 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors resize-none"
+              />
+            </div>
+
+            <div className="pt-2 text-center sm:text-right">
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-charcoal px-8 py-3 text-sm font-semibold text-base hover:bg-gold transition-colors shadow-sm w-full sm:w-auto"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+                Send Message
+              </button>
+            </div>
+          </form>
+        )}
       </section>
     </div>
   );
