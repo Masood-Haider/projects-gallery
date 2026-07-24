@@ -178,7 +178,7 @@ export default function SkillsList() {
       color: "text-[#F24E1E]",
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor" className="w-11 h-11 md:w-12 md:h-12 mb-3">
-          <path d="M8 2h4.5a4 4 0 010 8H8V2zm0 8h4.5a4 4 0 010 8H8v-8zm0 8a4 4 0 000 8h4.5v-8H8zm8-8a4 4 0 100-8h-4.5v8H16zm0 8a4 4 0 100-8h-4.5v8H16z" />
+          <path d="M12 2H8.5a3.5 3.5 0 0 0 0 7H12V2zM12 9H8.5a3.5 3.5 0 0 0 0 7H12V9zM8.5 16a3.5 3.5 0 1 0 3.5 3.5V16H8.5zM15.5 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM15.5 9a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z" />
         </svg>
       )
     },
