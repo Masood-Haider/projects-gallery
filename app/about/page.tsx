@@ -107,21 +107,21 @@ export default function AboutPage() {
               rel="noopener noreferrer"
               className="group flex items-center gap-4 rounded-xl border border-charcoal/10 bg-base p-4 hover:border-gold hover:shadow-md transition-all"
             >
-              <span className="text-charcoal/40 group-hover:text-gold transition-colors">
+              <span className="text-charcoal group-hover:text-gold transition-colors">
                 <PlatformIcon name={link.icon} />
               </span>
               <div>
                 <p className="text-sm font-semibold text-charcoal group-hover:text-gold transition-colors">
                   {link.name}
                 </p>
-                <p className="text-xs text-charcoal/40 truncate max-w-[200px]">
+                <p className="text-xs text-charcoal font-medium truncate max-w-[200px] group-hover:text-gold transition-colors">
                   {link.url}
                 </p>
               </div>
               <svg
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="ml-auto h-4 w-4 text-charcoal/20 group-hover:text-gold transition-colors flex-shrink-0"
+                className="ml-auto h-4 w-4 text-charcoal group-hover:text-gold transition-colors flex-shrink-0"
               >
                 <path fillRule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clipRule="evenodd" />
               </svg>
