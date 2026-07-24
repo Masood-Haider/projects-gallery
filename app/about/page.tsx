@@ -60,20 +60,22 @@ export default function AboutPage() {
         <h2 className="mb-6 text-2xl font-bold text-charcoal">
           Skills &amp; Technologies
         </h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-col gap-5">
           {skillGroups.map((group) => (
             <div
               key={group.label}
-              className="group rounded-xl border border-charcoal/10 bg-base shadow-sm p-5 hover:border-gold hover:shadow-md transition-all duration-200"
+              className="group rounded-2xl border border-charcoal/10 bg-base shadow-sm p-6 hover:border-gold/40 hover:shadow-md transition-all duration-200 flex flex-col md:flex-row md:items-center gap-4 md:gap-8"
             >
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-charcoal/40">
-                {group.label}
-              </p>
-              <div className="flex flex-wrap gap-2.5">
+              <div className="md:w-44 flex-shrink-0">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-charcoal/50 group-hover:text-gold transition-colors">
+                  {group.label}
+                </h3>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 flex-1">
                 {group.skills.map((skill) => (
                   <span
                     key={skill}
-                    className={`inline-flex items-center gap-2.5 rounded-xl border border-charcoal/10 px-3.5 py-2 text-sm font-semibold shadow-sm hover:scale-105 transition-all duration-200 ${getSkillColors(skill)}`}
+                    className={`inline-flex items-center gap-2.5 rounded-xl border border-charcoal/10 px-4 py-2.5 text-sm font-semibold shadow-sm hover:scale-105 transition-all duration-200 ${getSkillColors(skill)}`}
                   >
                     <SkillIcon name={skill} />
                     {skill}
