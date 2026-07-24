@@ -103,7 +103,7 @@ export default function Navbar() {
 
       {/* Bottom Animated Gold Border Line */}
       <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-charcoal/10 overflow-hidden pointer-events-none">
-        <div className="absolute bottom-0 left-0 h-[1.5px] w-80 bg-gradient-to-r from-transparent via-[#C5A059] to-transparent animate-marquee shadow-[0_0_10px_#C5A059]" />
+        <div className="absolute bottom-0 left-0 h-[1.5px] w-96 bg-gradient-to-r from-transparent via-[#C5A059] to-transparent animate-scan shadow-[0_0_12px_#C5A059]" />
       </div>
     </header>
   );
