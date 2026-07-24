@@ -7,10 +7,15 @@ import ConstellationBackground from "@/components/ConstellationBackground";
 import LoadingScreen from "@/components/LoadingScreen";
 
 export const metadata: Metadata = {
-  title: "Masood Haider — Project Showcase",
+  title: "Projects Gallery — Masood Haider",
   description:
-    "A clean, modern showcase of web applications and full-stack projects.",
-  keywords: ["Masood Haider", "projects", "showcase", "developer", "Next.js", "React"],
+    "A clean, modern showcase of web applications and full-stack projects by Masood Haider.",
+  keywords: ["Masood Haider", "Projects Gallery", "showcase", "developer", "Next.js", "React"],
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

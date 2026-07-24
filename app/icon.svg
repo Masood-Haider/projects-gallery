@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5C37E" />
+      <stop offset="50%" stop-color="#C5A059" />
+      <stop offset="100%" stop-color="#9A7734" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2C2C2C" />
+      <stop offset="100%" stop-color="#181818" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Dark Charcoal Background Card with Gold Border -->
+  <rect x="1" y="1" width="30" height="30" rx="8" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="1.5" />
+  
+  <!-- Bold Stylized P Monogram Mark -->
+  <path d="M10 8.5v15M10 8.5h6.5a3.75 3.75 0 0 1 0 7.5H10" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Gold Accent Star Dot -->
+  <circle cx="21.5" cy="18.5" r="2" fill="url(#goldGrad)" />
+</svg>
