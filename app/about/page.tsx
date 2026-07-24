@@ -80,10 +80,10 @@ export default function AboutPage() {
           <h1 className="text-3xl font-extrabold text-charcoal sm:text-5xl">
             Masood Haider
           </h1>
-          <p className="mt-2 text-sm sm:text-base font-medium text-gold">
+          <p className="mt-2 text-base sm:text-lg font-bold text-gold tracking-wide">
             Full-Stack Developer
           </p>
-          <p className="mt-4 max-w-xl text-sm sm:text-base text-charcoal/70 leading-relaxed">
+          <p className="mt-4 max-w-xl text-base sm:text-lg font-medium text-charcoal leading-relaxed">
             I design and build modern web applications — from polished,
             accessible frontends to scalable back-end systems. I love turning
             ideas into real products that people actually enjoy using.
