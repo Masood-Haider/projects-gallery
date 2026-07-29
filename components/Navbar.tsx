@@ -48,7 +48,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             href="/about"
-            className="rounded-full bg-charcoal px-5 py-2 text-sm font-semibold text-base hover:bg-charcoal-light transition-colors shadow-sm"
+            className="rounded-full bg-charcoal px-5 py-2 text-sm font-semibold text-base hover:bg-gold transition-colors shadow-sm"
           >
             Hire Me
           </Link>
@@ -94,7 +94,7 @@ export default function Navbar() {
           <Link
             href="/about"
             onClick={() => setMenuOpen(false)}
-            className="mt-2 w-full text-center rounded-full bg-charcoal py-3 text-sm font-semibold text-base hover:bg-charcoal-light transition-colors shadow-sm"
+            className="mt-2 w-full text-center rounded-full bg-charcoal py-3 text-sm font-semibold text-base hover:bg-gold transition-colors shadow-sm"
           >
             Hire Me
           </Link>
